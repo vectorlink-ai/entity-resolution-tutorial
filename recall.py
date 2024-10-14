@@ -12,6 +12,8 @@ if __name__ == "__main__":
         reader = csv.reader(csvfile)
         next(reader, None) # headers
         for row in reader:
+            if 'Aberer' in row[0]:
+                print(f"row: '{row}'")
             if row[0] in matches:
                 matches[row[0]].append(row[1])
             else:
@@ -24,15 +26,15 @@ if __name__ == "__main__":
         reader = csv.reader(csvfile)
         next(reader, None) # headers
         for row in reader:
-            dblp_id = row[0].removeprefix('id: ')
-            acm_id = row[1].removeprefix('id: ')
+            dblp_id = row[0]
+            acm_id = row[1]
             distance = row[2]
             if dblp_id in matches:
                 found +=1
                 if acm_id in matches[dblp_id]:
                     positives +=1
                 else:
-                    print(f"unmatched record: {dblp_id}<=>{acm_id}, distance: {distance}")
+                    print(f"unmatched record: '{dblp_id}'<=>'{acm_id}', probability: {distance}")
             else:
                 print(f"couldn't find: {dblp_id}")
 
