@@ -166,10 +166,19 @@ To obtain a measure of the match quality we use a technique known as [ROC AUC (R
 
 ## Matching
 
-With weights in hand we can fire off the process of generating a match file. This will simply apply the classifier to our candidate matches and we will save the ones above threshold in a file, including the actual value of the sigmoid so we have an idea of the confidence of the prediction. We open the filter to 0.4 here to ensure that we are getting even very weak candidate matches for our final search. We choose a match threshold of 0.55, so we are effectively trimming out some low confidence matches. Depending on application one may want to either lower or raise this threshold.
+With weights in hand we can fire off the process of generating a match file. This will simply apply the classifier to our candidate matches and we will save all of the matches above threshold into a CSV file, including the actual value of the sigmoid so we have an idea of the confidence of the prediction. The matches use the id field so that the original records can be recovered from the information given for the match in the CSV.
+
+We open the filter to 0.4 (this is a number between 0 and 1 giving the distance, with 0 being smallest as we are using a cosine measure) to ensure that we are getting even very weak candidate matches for our final search. We choose a match threshold of 0.55, so we are effectively trimming out some low confidence matches. Depending on application one may want to either lower or raise this threshold.
 
 ```
 cargo run --release --bin generate-vectors -- compare -s ~/acm-dblp/dblp -t ~/acm-dblp/acm --id-field "id" -f "record" --initial-threshold 0.4 -m 0.55 -c ~/acm-dblp/config -o ~/acm-dblp/matches.csv -w '{ "year": -9.939934, "title": -25.451017, "__INTERCEPT__":  3.1453862, "authors": -21.432272, "venue": -1.2297093 }'
 ```
 
-The results
+Congratulations! You now have the list of matches. To evaluate the quality of the matches you can use the `recall.py` which will compare to the exact matches.
+
+## Conclusion
+
+We have gone through the basic process of learning a match classifier on records with a very flexible approach which leverages AI to obtain high quality record matches. We require only a CSV or JSON lines file and match candidates to learn weights.
+
+There are two major things missing from the approach outlined, the first is how to obtain the correct matches, and the second is how to make this process scale to larger solutions. We will answer both of these questions in further articles.
+
