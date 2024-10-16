@@ -136,7 +136,9 @@ If we have a match, `y` is 1.0 and the second term vanishes, if it is a non-matc
 
 We then take the cost to be the *order* of the sigmoid in the natural base, rather than the raw magnitude as is usually done for linear regression. The choice is essentialyl due to the non-linearity of the sigmoid. The choice allows us to penalise gracefully as we speed up towards 0.5 or slow down towards 0 or 1. The negative sign ensures that it is a *cost* we are minimising by forcing us to seek the least negative outcome.
 
-At this point we take a gradient descent through beta-space according to this cost-function. Gradient descent attempts to follow the path of least resistance to find a minimum. In the actual programme all of this is handled with the rust library [argmin](https://docs.rs/argmin/latest/argmin/).
+![image](./images/Gradient_descent.gif)
+
+At this point we take a gradient descent through beta-space according to this cost-function. Gradient descent attempts to follow the path of least resistance to find a minimum. In the actual programme all of this search is handled with the rust library [argmin](https://docs.rs/argmin/latest/argmin/).
 
 The process relies on the file [DBLP-ACM_perfectMapping.csv](./DBLP-ACM_perfectMapping.csv) which has a list of all correct matches. The process requires that we have an exhaustive list of the matches as everything not contained in the list is deemed to be a non-match and will influence the above cost function my choosing y = 0.
 
