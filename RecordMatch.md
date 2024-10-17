@@ -109,13 +109,13 @@ Since we have multiple fields, we want to learn a classifier which can learn wei
 ![image](./images/logistic-curve.png)
 
 ```math
-y = sigmoid( x . beta + beta_intercept )
+y = \sigma( x \dot \beta + \beta_{intercept} )
 ```
 
 To simplify calculations, we add an additional dummy dimension to x which is always 1.0, so we can absorbe the beta_intercept and write:
 
 ```math
-y = sigmoid( x . beta )
+y = \sigma( x \dot \beta )
 ```
 
 Each dimension of the x vector is one of the fields we have vectorised. We can call the title dimension for instance `x_title`, which will have `beta_title` as a weight.
