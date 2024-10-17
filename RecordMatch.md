@@ -44,7 +44,7 @@ Then you should create a config file called `config` with the following content:
 
 First, we take the two CSV files and vectorize both, making sure to specify the field we would like to use as an identifier for the record. If you are using a CSV without an id field, you should add an additional column with a row count or some other unique identifier so you can recover the original record.
 
-To specify the vectorised fields we need to supply a template directory which is filled with handlebars templates that describe our fields. You can see the fields which correspond to our current use-case in the `templates` folder from the cloned dataset.
+To specify the vectorised fields we need to supply a template directory which is filled with [handlebars templates](https://handlebarsjs.com/) that describe our fields. You can see the fields which correspond to our current use-case in the `templates` folder from the cloned dataset.
 
 ```
   -rw-rw-r-- 1 gavin gavin   20 Okt 14 10:49 authors.handlebars
@@ -90,7 +90,7 @@ This creates two *graphs* which hold information about which vectors correspond 
 
 ## Indexing
 
-The indexing phase is used to reduce the search space through a process called *filtering*. This filtering is obtained using an indexing approach for our vectors known as HNSW. This index is based on approximate nearest neighbours ([ANN](https://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximation_methods)) which allows one to quickly discover those vectors which are nearby with some probability.
+The indexing phase is used to reduce the search space through a process called [*filtering*](https://arxiv.org/pdf/1905.06167). This filtering is obtained using an indexing approach for our vectors known as [HNSW](https://arxiv.org/abs/1603.09320). This index is based on approximate nearest neighbours ([ANN](https://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximation_methods)) which allows one to quickly discover those vectors which are nearby with some probability.
 
 This filtering process is important since matching M records to themselves, or M records to N other records naively is the product of the number of records (i.e. $`O(M^2)`$ or $`O(M N))`$, which gets big quickly. For a million records, this is already a trillion combinations - a number which is likely infeasible to calculate. Obviously most comparisons can be quickly exluded if we know something about the candidate records and that is why we use filtering. Now the process is more like $`O(N \log(N))`$ or $`O(M \log(N))`$. For a million this is more like $`C \times 1,000,000 \times 6`$, a number more managable than a trillion. And if we are looking for record matches of a dataset with itself, the number can be even smaller as we can use our ANN to find k approximate nearest neighbors extremely quickly.
 
