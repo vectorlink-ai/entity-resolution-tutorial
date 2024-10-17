@@ -118,9 +118,9 @@ To simplify calculations, we add an additional dummy dimension to x which is alw
 y = \sigma( \vec{x} \cdot \vec{\beta} )
 ```
 
-Each dimension of the x vector is one of the fields we have vectorised. We can call the title dimension for instance `x_title`, which will have `beta_title` as a weight.
+Each dimension of the x vector is one of the fields we have vectorised. We can call the title dimension for instance $`x_{title}`$, which will have `\beta_{title}` as a weight.
 
-Since a sigmoid function is symmetric and smooth around 0.5, we will call a prediction of the class a match if it is > 0.5 and a non-match if it is < 0.5.
+Since a sigmoid function is anti-symmetric and smooth around 0.5, we will call a prediction of the class a match if it is > 0.5 and a non-match if it is < 0.5.
 
 At this point we need to learn the weights by searching through beta-space and finding a minimum of a cost function.
 
@@ -160,7 +160,7 @@ We find the following weights:
   "venue":         -1.2297093 }
 ```
 
-We see here that beta_intercept is writen as `"__INTERCEPT__"` and does not correspond to any of the fields. This intercept is used to help us balance the sigmoid nicely around the classification point of 0.5.
+We see here that $`\beta_{intercept}`$ is writen as `"__INTERCEPT__"` and does not correspond to any of the fields. This intercept is used to help us balance the sigmoid nicely around the classification point of 0.5.
 
 In addition to the weight calculation, we also get an assessment of the quality of the weights in predicting our class. Internally, the perfect match file is broken into two pieces: one which is used to train (about 1/3 of the file) and the remainder for the evaluation of the match quality.
 
