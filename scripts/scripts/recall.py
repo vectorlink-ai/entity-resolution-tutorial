@@ -12,8 +12,6 @@ if __name__ == "__main__":
         reader = csv.reader(csvfile)
         next(reader, None) # headers
         for row in reader:
-            if 'Aberer' in row[0]:
-                print(f"row: '{row}'")
             if row[0] in matches:
                 matches[row[0]].append(row[1])
             else:
