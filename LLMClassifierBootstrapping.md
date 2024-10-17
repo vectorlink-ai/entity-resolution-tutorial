@@ -139,7 +139,7 @@ ROC AUC 0.9962237191263523
 {"title":-41.40007,"authors":-32.478287,"venue":-2.607178,"__INTERCEPT__":10.33813,"year":-16.176899}
 ```
 
-An ROC AUC of 0.996 means we have a very high quality discriminator. If this number is not close to 1.0, then we probably have to change some portion of our analysis, but in our case we can forge ahead. We can then use these weights to make our final determination.
+An [ROC AUC](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) of 0.996 means we have a very high quality discriminator. If this number is not close to 1.0, then we probably have to change some portion of our analysis, but in our case we can forge ahead. We can then use these weights to make our final determination.
 
 ```shell
 cargo run --release --bin generate-vectors -- compare -t ~/acm-dblp2/acm -s ~/acm-dblp2/dblp -f "record" --initial-threshold 0.4 -m 0.999 -c ~/acm-dblp2/dblp/config -o ~/acm-dblp2/auto-matches-learned.csv -w  '{"title":-41.40007,"authors":-32.478287,"venue":-2.607178,"__INTERCEPT__":10.33813,"year":-16.176899}'
