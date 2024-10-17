@@ -127,7 +127,7 @@ At this point we need to learn the weights by searching through beta-space and f
 The cost function we choose is:
 
 ```math
-cost = -[ y \ln(\siga( x \cdot \beta )) + (1.0 - y) \ln((1 - \sigma( x \dot \beta))) ]
+cost = -[ y \ln(\sigma( x \cdot \beta )) + (1.0 - y) \ln((1 - \sigma( x \cdot \beta))) ]
 ```
 
 What does this cost function calculate?
