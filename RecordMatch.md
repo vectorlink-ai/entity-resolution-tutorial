@@ -118,7 +118,7 @@ To simplify calculations, we add an additional dummy dimension to x which is alw
 y = \sigma( \vec{x} \cdot \vec{\beta} )
 ```
 
-Each dimension of the x vector is one of the fields we have vectorised. We can call the title dimension for instance $`x_{title}`$, which will have `\beta_{title}` as a weight.
+Each dimension of the x vector is one of the fields we have vectorised. We can call the title dimension for instance $`x_{title}`$, which will have $`\beta_{title}`$ as a weight.
 
 Since a sigmoid function is anti-symmetric and smooth around 0.5, we will call a prediction of the class a match if it is > 0.5 and a non-match if it is < 0.5.
 
