@@ -39,7 +39,7 @@ Then you should create a config file called `config` with the following content:
 
 ```json
 { "model" : "openai-small3",
-  "api_key" : "MY_API_KEY_HERE",
+  "api_key" : "MY_API_KEY_HERE" }
 ```
 
 First, we take the two CSV files and vectorize both, making sure to specify the field we would like to use as an identifier for the record. If you are using a CSV without an id field, you should add an additional column with a row count or some other unique identifier so you can recover the original record.
