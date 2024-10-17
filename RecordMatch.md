@@ -127,12 +127,12 @@ At this point we need to learn the weights by searching through beta-space and f
 The cost function we choose is:
 
 ```math
-cost = -[ y \ln(\sigma( x \cdot \beta )) + (1.0 - y) \ln((1 - \sigma( x \cdot \beta))) ]
+cost = -[ y \ln(\sigma( \vec{x} \cdot \vec{\beta} )) + (1.0 - y) \ln((1 - \sigma( \vec{x} \cdot \vec{\beta}))) ]
 ```
 
 What does this cost function calculate?
 
-If we have a match, `y` is 1.0 and the second term vanishes, if it is a non-match `y` is 0.0 and the first term vanishes. Similarly we subtract from one in the second term to simply invert the meaning of the sigmoid for a non-match (changing a perfect prediction of a non match to a 1 and a match to 0).
+If we have a match, $`y`$ is 1.0 and the second term vanishes, if it is a non-match $`y`$ is 0.0 and the first term vanishes. Similarly we subtract from one in the second term to simply invert the meaning of the sigmoid for a non-match (changing a perfect prediction of a non match to a 1 and a match to 0).
 
 We then take the cost to be the *order* of the sigmoid in the natural base, rather than the raw magnitude as is usually done for linear regression. The choice is essentialyl due to the non-linearity of the sigmoid. The choice allows us to penalise gracefully as we speed up towards 0.5 or slow down towards 0 or 1. The negative sign ensures that it is a *cost* we are minimising by forcing us to seek the least negative outcome.
 
@@ -140,7 +140,7 @@ We then take the cost to be the *order* of the sigmoid in the natural base, rath
 
 At this point we take a gradient descent through beta-space according to this cost-function. Gradient descent attempts to follow the path of least resistance to find a minimum. In the actual programme all of this search is handled with the rust library [argmin](https://docs.rs/argmin/latest/argmin/).
 
-The process relies on the file [DBLP-ACM_perfectMapping.csv](./DBLP-ACM_perfectMapping.csv) which has a list of all correct matches. The process requires that we have an exhaustive list of the matches as everything not contained in the list is deemed to be a non-match and will influence the above cost function my choosing y = 0.
+The process relies on the file [DBLP-ACM_perfectMapping.csv](./DBLP-ACM_perfectMapping.csv) which has a list of all correct matches. The process requires that we have an exhaustive list of the matches as everything not contained in the list is deemed to be a non-match and will influence the above cost function my choosing $`y = 0`$.
 
 Later, we will return to the question of how to create such a set of perfect matches to learn weights for actual match problems where one often does not have such a curated training set available.
 
