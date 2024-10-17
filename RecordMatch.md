@@ -92,7 +92,7 @@ This creates two *graphs* which hold information about which vectors correspond 
 
 The indexing phase is used to reduce the search space through a process called *filtering*. This filtering is obtained using an indexing approach for our vectors known as HNSW. This index is based on approximate nearest neighbours ([ANN](https://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximation_methods)) which allows one to quickly discover those vectors which are nearby with some probability.
 
-This filtering process is important since matching M records to themselves, or M records to N other records naively is the product of the number of records (i.e. O(M^2) or O(M*N)), which gets big quickly. For a million records, this is already a trillion combinations - a number which is likely infeasible to calculate. Obviously most comparisons can be quickly exluded if we know something about the candidate records and that is why we use filtering. Now the process is more like O(N * Log N) or O(M * Log N). For a million this is more like C * 1_000_000 * 6, a number more managable than a trillion.
+This filtering process is important since matching M records to themselves, or M records to N other records naively is the product of the number of records (i.e. $`O(M^2)`$ or $`O(M N))`$, which gets big quickly. For a million records, this is already a trillion combinations - a number which is likely infeasible to calculate. Obviously most comparisons can be quickly exluded if we know something about the candidate records and that is why we use filtering. Now the process is more like $`O(N Log(N))`$ or $`O(M log(N))`$. For a million this is more like $`C \times 1_000_000 \times 6`$, a number more managable than a trillion.
 
 In our case we are going to use the `record.handlebars` template's generated embeddings as our filter. That is, we will use the distance between whole records in our embedding space as the method to find candidate records. This field is called `record` due to the name of the template.
 
@@ -104,7 +104,7 @@ cargo run --release --bin index-graph-field -- --graph-directory ~/acm-dblp/acm 
 
 Now that we have an indexed field we can proceed with the problem of learning a classifier. We use logistic regression as we have a two class problem. Essentially we have to say whether a record pair matches, or doesn't.
 
-Since we have multiple fields, we want to learn a classifier which can learn weights which can be used to maximise our successful classification. We do this by using a linear combination of the distances with weights in a vector `$$\vec{\beta}$$`, and then applying a sigmoid (`$$\sigma$$`).
+Since we have multiple fields, we want to learn a classifier which can learn weights which can be used to maximise our successful classification. We do this by using a linear combination of the distances with weights in a vector $`\vec{\beta}`$, and then applying a sigmoid ($`\sigma`$).
 
 ![image](./images/logistic-curve.png)
 
