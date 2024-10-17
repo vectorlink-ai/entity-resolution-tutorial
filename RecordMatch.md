@@ -102,9 +102,9 @@ cargo run --release --bin index-graph-field -- --graph-directory ~/acm-dblp/acm 
 
 ## Learning a Classifier
 
-Now that we have an indexed field we can proceed with the problem of learning a classifier. We use logistic regression as we have a two class problem. Essentially we have to say whether a record pair matches, or doesn't.
+Now that we have an indexed field we can proceed with the problem of learning a classifier. We use [logistic regression](https://en.wikipedia.org/wiki/Logistic_regression) as we have a two class problem. Essentially we have to say whether a record pair matches, or doesn't.
 
-Since we have multiple fields, we want to learn a classifier which can learn weights which can be used to maximise our successful classification. We do this by using a linear combination of the distances with weights in a vector $`\vec{\beta}`$, and then applying a sigmoid ($`\sigma`$).
+Since we have [multiple fields](https://en.wikipedia.org/wiki/Logistic_regression#Multiple_explanatory_variables), we want to learn a classifier which can learn weights for each feature which can be used to maximise our successful classification. We do this by using a linear combination of the distances with weights in a vector $`\vec{\beta}`$, and then applying a sigmoid ($`\sigma`$).
 
 ![image](./images/logistic-curve.png)
 
