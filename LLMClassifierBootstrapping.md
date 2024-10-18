@@ -118,7 +118,7 @@ Then for DBLP2...
 cargo run --release --bin generate-vectors line-index --config ~/acm-dblp2/config -r ~/acm-dblp2/DBLP2.utf8.csv -i ~/acm-dblp2/DBLP2.utf8.line_index
 ```
 
-One this is done we can fire off our match generation task to OpenAI supplying two files, one for correct matches and one for non-matches (which contains the negative information we need for the classifier).
+Once this is done we can fire off our match generation task to OpenAI supplying two files, one for correct matches and one for non-matches (which contains the negative information we need for the classifier).
 
 The final command includes an `--entity-description` flag. This flag is used to tell the LLM what type of record it is trying to match which can help it in determining whether the entities are the same.
 
